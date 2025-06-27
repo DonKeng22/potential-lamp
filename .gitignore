@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+venv310/
+*.egg-info/
+.env
+
+# IDEs
+.idea/
+.vscode/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+temp/
+
+# Build artifacts
+dist/
+build/
+*.zip
+*.tar.gz
+
+# Frontend dependencies
+node_modules/
+
+# Other
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
