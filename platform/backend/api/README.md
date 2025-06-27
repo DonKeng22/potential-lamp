@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../../../../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # Backend API Endpoints
 
 This document outlines the key REST API endpoints for the Field Hockey Broadcasting Platform backend. These APIs serve the web, mobile, and training interfaces.

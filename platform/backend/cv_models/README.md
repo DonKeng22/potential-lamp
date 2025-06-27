@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../../../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # Computer Vision Models
 
 This module contains computer vision models for field hockey event detection and player tracking.

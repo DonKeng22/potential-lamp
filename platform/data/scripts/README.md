@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # Data Scripts
 
 This directory contains scripts for managing and generating data for the Field Hockey Broadcasting Platform.

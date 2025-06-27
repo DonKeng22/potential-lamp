@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../../../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # Field Hockey Broadcasting Platform - Mobile Frontend
 
 A cross-platform mobile application built with Flutter for the AI-powered field hockey broadcasting platform.

@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # 🏑 Multi-Platform Field Hockey Broadcasting and Engagement Application
 
 An AI-powered multi-platform application for live field hockey broadcasting, real-time commentary generation, community engagement, and advanced player analytics.

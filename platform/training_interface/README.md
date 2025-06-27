@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../../../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # Training Interface
 
 This module provides a web-based interface for uploading training data and training AI models for the field hockey broadcasting platform.

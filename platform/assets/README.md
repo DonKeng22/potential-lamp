@@ -1,3 +1,5 @@
+**IMPORTANT:** For project status, progress, and issues, refer to the `../../../docs/project_status/progress_log.md` file. Any changes implemented should be logged there with a brief description and the reason for the change.
+
 # Project Assets
 
 This directory contains various assets used across the Field Hockey Broadcasting Platform, including UI images, logos, and example video streams.
