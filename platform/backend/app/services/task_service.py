@@ -66,7 +66,7 @@ class TaskService:
         if task_type:
             query = query.filter(ProcessingTask.task_type == task_type)
         
-        return query.offset(skip).limit(limit).order_by(ProcessingTask.created_at.desc()).all()
+        return query.order_by(ProcessingTask.created_at.desc()).offset(skip).limit(limit).all()
     
     def update_task_status(
         self,
