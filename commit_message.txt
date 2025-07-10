@@ -1,1 +1,0 @@
-feat: Implement stable Docker Compose setup for backend and frontend, fix build issues and update documentation

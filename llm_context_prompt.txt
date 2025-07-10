@@ -1,0 +1,47 @@
+## Project Context for LLM Developer: Field Hockey Broadcasting Platform
+
+**Overall Goal:** Develop a multi-platform streaming and community platform for field hockey, leveraging open-source technologies and AI-driven features.
+
+**Current Status:**
+*   **Core Infrastructure:** Backend (FastAPI), Web Frontend (React), PostgreSQL, Redis, and Celery are set up and containerized using Docker.
+*   **Backend:** A video upload endpoint (`/streams/upload-video`) is implemented.
+*   **Frontend:** The web frontend is accessible via Docker.
+*   **Phase Progress:** We are currently in **Phase 3: Computer Vision Integration**.
+*   **Immediate Problem:** The backend service is failing to start when the `api.routes.streams` module is imported into `main.py`. The `docker-compose logs backend` command yields no output, indicating a very early crash during the import process.
+*   **Previous Debugging Steps:**
+    *   Successfully created the project directory structure.
+    *   Set up Python virtual environment and installed initial backend dependencies.
+    *   Created `main.py` with a basic `/health` endpoint.
+    *   Dockerized backend and frontend services.
+    *   Resolved frontend Docker issues (Node.js version, `node_modules` volume mount, Vite server configuration).
+    *   Implemented the `/streams/upload-video` endpoint and successfully tested file uploads when the backend was running.
+    *   Encountered and resolved `opencv-python` dependency issues (`libGL.so.1`, `libgthread-2.0.so.0`) by installing `libgl1-mesa-glx` and `libglib2.0-0` in the backend Dockerfile.
+    *   Temporarily removed the `streams` import from `main.py`, and the backend started successfully, confirming the issue is specifically related to the `streams` module or its imports.
+    *   The `cv_models/tasks.py` file has been created, containing a Celery task `process_video_for_detection` that uses `ultralytics` and `opencv-python`. This task is imported by `streams.py`.
+
+**Immediate Next Step (Critical):**
+1.  **Identify the exact import error:** The backend is crashing silently when `streams` is imported. You need to run the backend container in an interactive mode (`docker-compose run --rm backend`) to capture the full traceback and identify the specific line or module causing the crash.
+
+**Subsequent Steps (after resolving the immediate issue):**
+2.  **Debug and Resolve:** Based on the traceback, identify and fix the root cause of the import error. This might involve:
+    *   Further Dockerfile modifications for missing system libraries.
+    *   Adjusting Python imports or code within `streams.py` or `cv_models/tasks.py`.
+    *   Ensuring all necessary Python packages are correctly installed in the Docker image.
+3.  **Verify Backend Stability:** Once the backend starts successfully with the `streams` module imported, verify that the `/health` endpoint and the `/streams/upload-video` endpoint (including the Celery task dispatch) are fully functional.
+4.  **Continue Phase 3 - Computer Vision Integration:**
+    *   Ensure the `process_video_for_detection` Celery task correctly executes YOLOv8 detection on uploaded videos.
+    *   Implement logic to store detection results in the database.
+    *   Begin implementing the event detection pipeline (goals, cards, corners) based on object detection results.
+5.  **Maintain Documentation:**
+    *   **Crucially, update `docs/project_status/progress_log.md` with a detailed entry for each significant action taken, including the problem, solution, and outcome.**
+    *   Update `docs/project_status/project_plan.md` as major milestones are achieved.
+
+**Development Philosophy:**
+*   Prioritize open-source solutions.
+*   Focus on modularity and maintainability.
+*   Implement robust logging for error capture and debugging.
+*   Ensure Docker-first deployment for consistency.
+*   Use virtual environments where appropriate.
+*   Self-correct and learn from failures.
+
+Proceed with the immediate next step of debugging the backend startup.
