@@ -184,8 +184,3 @@ Step 6: Documentation & Analytics
 Update documentation in project_status.
 Provide usage instructions and analytics API docs.
 4. Immediate Action
-Would you like to:
-
-Start with a minimal working annotation UI (YouTube + field boundary + save/load)?
-Or, do you want a full-featured prototype (with player/ball tracking and 3D preview) from the start?
-Let me know your preference, and I’ll begin scaffolding the code and database, then iterate with you on features and UI!
