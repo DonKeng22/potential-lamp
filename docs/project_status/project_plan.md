@@ -28,7 +28,7 @@ The application will follow a microservices-oriented architecture, with a clear 
 graph TD
     A[User/Client] -->|API Requests| B(FastAPI Backend)
     B -->|Orchestrates| C(Celery Task Queue)
-    C -->|Sends/Recieves Tasks| D(Redis)
+    C -->|Sends/Receives Tasks| D(Redis)
     B -->|Stores/Retrieves Metadata| E(PostgreSQL Database)
     C -->|Executes Training| F(ML Modules: CV, NLP, Audio)
     F -->|Stores Trained Models| G(Model Storage)
