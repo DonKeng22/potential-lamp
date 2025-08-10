@@ -1,3 +1,18 @@
+## Log Entry - 2025-07-10
+
+### Action: Added Celery-based training task and status endpoint
+
+**Description:**
+- Implemented a placeholder `train_model` Celery task in `platform/backend/cv_models/tasks.py` that simulates a long-running training job and reports progress.
+- Updated `platform/backend/api/routes/training.py` to dispatch the task and expose `/train/status/{task_id}` for monitoring job state.
+
+**Reason:**
+To initiate backend model training orchestration by enabling asynchronous jobs with progress tracking.
+
+**Outcome:**
+- Backend can now start dummy training jobs and report their progress.
+- Provides a foundation for integrating real training logic in future iterations.
+
 ## Log Entry - 2025-07-09
 
 ### Action: Fixed FastAPI router registration and Celery worker OpenCV/Ultralytics import errors

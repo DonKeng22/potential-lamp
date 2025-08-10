@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException, BackgroundTasks, Query, UploadFile, File, Response
+from fastapi import APIRouter, HTTPException, Query, UploadFile, File, Response
 from pydantic import BaseModel
 from typing import List, Optional
+from cv_models.tasks import train_model
 
 router = APIRouter()
 
@@ -29,10 +30,24 @@ INSIGHTS = Insights(totalVideos=2, totalEvents=20, mostCommonEvent="goal")
 
 # --- Endpoints ---
 @router.post("/train/start")
-def start_training(req: VideoLinkRequest, background_tasks: BackgroundTasks):
-    # TODO: Trigger Celery/background task for training/annotation
-    # For now, just simulate
-    return {"status": "started", "video_link": req.video_link}
+def start_training(req: VideoLinkRequest):
+    task = train_model.delay(req.video_link)
+    return {"status": "started", "task_id": task.id}
+
+
+@router.get("/train/status/{task_id}")
+def get_training_status(task_id: str):
+    task = train_model.AsyncResult(task_id)
+    if task.state == 'PENDING':
+        return {'state': task.state, 'status': 'Pending...'}
+    elif task.state != 'FAILURE':
+        return {
+            'state': task.state,
+            'status': task.info.get('status', ''),
+            'result': task.info.get('model_path', '')
+        }
+    else:
+        return {'state': task.state, 'status': str(task.info)}
 
 @router.get("/train/annotations", response_model=List[Annotation])
 def get_annotations(

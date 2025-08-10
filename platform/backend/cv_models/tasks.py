@@ -6,6 +6,7 @@ from cv_models.events import EventDetector
 from data.models import DetectionResult, EventResult
 from data.db import SessionLocal
 import json
+import time
 
 # Initialize Celery
 celery_app = Celery('video_processor', broker='redis://redis:6379/0', backend='redis://redis:6379/0')
@@ -75,3 +76,22 @@ def process_video_for_detection(video_path: str):
         db.close()
 
     return {"status": "completed", "detections": results, "events": events}
+
+
+@celery_app.task(bind=True)
+def train_model(self, data_path: str):
+    """Dummy long-running training task.
+
+    Args:
+        data_path: Location of the training data or identifier.
+
+    This task simulates model training by sleeping and updating progress
+    so the API can report intermediate states back to the client.
+    """
+    steps = 5
+    for step in range(steps):
+        self.update_state(state="PROGRESS", meta={"status": f"step {step + 1}/{steps}"})
+        time.sleep(1)
+    # In a real implementation this would return the path to the trained model
+    return {"status": "completed", "model_path": f"{data_path}/model.pt"}
+
