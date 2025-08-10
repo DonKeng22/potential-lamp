@@ -29,12 +29,16 @@ async def upload_video(
             detail="Only video files are allowed"
         )
     
-    if file.size and file.size > settings.max_file_size:
+    # Read the entire file to enforce upload size limits since
+    # UploadFile doesn't expose a reliable ``size`` attribute.
+    contents = await file.read()
+    if len(contents) > settings.max_file_size:
         raise HTTPException(
             status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-            detail=f"File size exceeds maximum allowed size of {settings.max_file_size} bytes"
+            detail=f"File size exceeds maximum allowed size of {settings.max_file_size} bytes",
         )
-    
+    file.file.seek(0)
+
     video_service = VideoService(db)
     video = await video_service.save_uploaded_file(file)
     
