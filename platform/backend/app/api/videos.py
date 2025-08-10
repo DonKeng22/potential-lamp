@@ -121,7 +121,14 @@ async def get_video_detections(
     frame_end: Optional[int] = None,
     db: Session = Depends(get_db)
 ):
-    """Get detection results for a video"""
+    """Get detection results for a video.
+
+    The optional ``frame_start`` and ``frame_end`` query parameters can be
+    used to limit the returned detections to a specific inclusive range of
+    frame numbers. Only detections with ``frame_number`` greater than or
+    equal to ``frame_start`` and less than or equal to ``frame_end`` are
+    included in the response.
+    """
     
     video_service = VideoService(db)
     detections = video_service.get_detections(
