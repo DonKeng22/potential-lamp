@@ -26,3 +26,16 @@ def test_video_upload():
     data = response.json()
     for field in ["id", "filename", "status", "message"]:
         assert field in data
+
+
+def test_video_upload_invalid_extension(tmp_path):
+    client = TestClient(app)
+    tmp_file = tmp_path / "sample.txt"
+    tmp_file.write_bytes(b"not a video")
+    with tmp_file.open("rb") as file:
+        response = client.post(
+            "/api/v1/videos/upload",
+            files={"file": ("sample.txt", file, "video/mp4")},
+        )
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Unsupported video file extension"

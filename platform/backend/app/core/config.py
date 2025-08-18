@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     # File uploads
     upload_dir: str = "data/uploads"
     max_file_size: int = 100 * 1024 * 1024  # 100MB
+    allowed_video_extensions: List[str] = [".mp4", ".mov", ".avi"]
     
     class Config:
         env_file = ".env"

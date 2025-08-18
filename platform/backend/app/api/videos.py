@@ -28,6 +28,13 @@ async def upload_video(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Only video files are allowed"
         )
+
+    file_extension = os.path.splitext(file.filename)[1].lower()
+    if file_extension not in settings.allowed_video_extensions:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unsupported video file extension"
+        )
     
     # Read the entire file to enforce upload size limits since
     # UploadFile doesn't expose a reliable ``size`` attribute.
