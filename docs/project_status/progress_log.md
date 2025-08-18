@@ -1,3 +1,18 @@
+## Log Entry - 2025-08-10
+
+### Action: Enforced allowed video extensions for uploads
+
+**Description:**
+- Added `allowed_video_extensions` configuration and validation in upload endpoint.
+- Added tests to reject unsupported extensions.
+
+**Reason:**
+To ensure only expected video formats are processed by the system.
+
+**Outcome:**
+- Upload endpoint rejects files with invalid extensions.
+- `test_video_upload_invalid_extension` passes.
+
 ## Log Entry - 2025-07-10
 
 ### Action: Added Celery-based training task and status endpoint
